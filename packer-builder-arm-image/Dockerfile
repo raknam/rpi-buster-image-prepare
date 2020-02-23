@@ -36,6 +36,7 @@ RUN curl -# "https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PA
   rm /tmp/packer.zip
 WORKDIR /build
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 COPY --from=builder /build/packer-builder-arm-image /bin/packer-builder-arm-image
 ENTRYPOINT ["/entrypoint.sh"]
