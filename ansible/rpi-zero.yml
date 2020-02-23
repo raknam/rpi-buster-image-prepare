@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: root
+  become: yes
+
+  tasks:
+  - name: Installing packages
+    apt: name=htop,build-essential update_cache=true
+  - name: Configuring SSH
+    copy: content="" dest=/boot/ssh

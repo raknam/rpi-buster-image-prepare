@@ -15,9 +15,15 @@
       "type": "shell",
       "inline": [
           "echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections",
-	      "apt-get update",
-	      "apt-get upgrade -y"
+	      "apt update",
+	      "apt upgrade -y",
+          "apt install -y ansible"
       ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/rpi-zero.yml",
+      "playbook_dir": "ansible"
     }
   ]
 }
