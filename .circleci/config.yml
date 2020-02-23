@@ -17,7 +17,13 @@ jobs:
       - checkout
       - run:
           command: |
-            chmod +x prepare.sh
-            ./prepare.sh
+            echo ${GITHUB_TOKEN} | docker login -u raknam --password-stdin docker.pkg.github.com
+            docker run \
+              --rm \
+              --privileged \
+              -v ${PWD}:/build:ro \
+              -v ${PWD}/packer_cache:/build/packer_cache \
+              -v ${PWD}/output:/build/output \
+              docker.pkg.github.com/raknam/rpi-buster-image-prepare/packer-builder-arm build -debug rpi-zero.json
       - store_artifacts:
           path: output
